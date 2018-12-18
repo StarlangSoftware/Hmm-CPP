@@ -1,0 +1,10 @@
+cmake_minimum_required(VERSION 3.12)
+project(Hmm)
+
+set(CMAKE_CXX_STANDARD 20)
+include_directories(include)
+link_directories(library)
+add_library(Hmm Hmm.cpp Hmm.h HmmState.cpp HmmState.h Hmm1.cpp Hmm1.h Hmm2.cpp Hmm2.h)
+target_link_libraries(Hmm Math DataStructure)
+add_executable(TestHmm Hmm.cpp Hmm.h HmmState.cpp HmmState.h Hmm1.cpp Hmm1.h Hmm2.cpp Hmm2.h TestHmm.cpp)
+target_link_libraries(TestHmm Math DataStructure)
