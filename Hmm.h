@@ -37,8 +37,8 @@ template<class State, class Symbol> map<Symbol, double> Hmm<State, Symbol>::calc
         }
     }
     double sum = counts.sumOfCounts();
-    for (auto item :counts){
-        emissionProbabilities.emplace(item.first, item.second / sum);
+    for (auto it = counts.begin(); it != counts.end(); it++){
+        emissionProbabilities.emplace(it->first, it->second / sum);
     }
     return emissionProbabilities;
 }

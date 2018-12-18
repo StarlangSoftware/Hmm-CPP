@@ -44,7 +44,6 @@ template<class State, class Symbol> void Hmm2<State, Symbol>::calculateTransitio
         }
     }
     this->transitionProbabilities.columnWiseNormalize();
-
 }
 
 template<class State, class Symbol> Vector Hmm2<State, Symbol>::logOfColumn(int column) {
@@ -108,12 +107,12 @@ template<class State, class Symbol> Hmm2<State, Symbol>::Hmm2(unordered_set<Stat
         this->stateIndexes.emplace(state, i);
         i++;
     }
-    calculatePi(observations);
+    calculatePi(observationCount, observations);
     for (State state : states){
-        map<Symbol, double> emissionProbabilities = calculateEmissionProbabilities(state, observationCount, observations, emittedSymbols);
+        map<Symbol, double> emissionProbabilities = this->calculateEmissionProbabilities(state, observationCount, observations, emittedSymbols);
         this->states.emplace_back(state, emissionProbabilities);
     }
-    calculateTransitionProbabilities(observations);
+    calculateTransitionProbabilities(observationCount, observations);
 }
 
 #endif //HMM_HMM2_H
