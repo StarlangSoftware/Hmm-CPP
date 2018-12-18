@@ -3,6 +3,7 @@
 //
 #include <vector>
 #include <unordered_set>
+#include "Hmm.h"
 #include "Hmm1.h"
 #include "Hmm2.h"
 

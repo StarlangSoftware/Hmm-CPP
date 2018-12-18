@@ -16,10 +16,6 @@ protected:
     map<State, unsigned long> stateIndexes;
     vector<HmmState<State, Symbol>> states;
     unsigned long stateCount = 0;
-    virtual void calculatePi(int observationCount, vector<State>* observations) = 0;
-    virtual void calculateTransitionProbabilities(int observationCount, vector<State>* observations) = 0;
-    virtual vector<State> viterbi(vector<Symbol> s) = 0;
-    Hmm(unordered_set<State> states, int observationCount, vector<State>* observations, vector<Symbol>* emittedSymbols);
 public:
     map<Symbol, double> calculateEmissionProbabilities(State state, int observationCount, vector<State>* observations, vector<Symbol>* emittedSymbols);
     double safeLog(double x);

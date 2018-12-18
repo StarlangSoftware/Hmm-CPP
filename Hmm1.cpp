@@ -5,9 +5,6 @@
 #include <VectorSizeMismatch.h>
 #include "Hmm1.h"
 
-template<class State, class Symbol> Hmm1<State, Symbol>::Hmm1(unordered_set<State> states, int observationCount, vector<State> *observations, vector<Symbol> *emittedSymbols){
-}
-
 template<class State, class Symbol> void Hmm1<State, Symbol>::calculatePi(int observationCount, vector<State> *observations) {
     pi = Vector(this->stateCount, 0.0);
     for (int i = 0; i < observationCount; i++) {
@@ -78,4 +75,19 @@ template<class State, class Symbol> vector<State> Hmm1<State, Symbol>::viterbi(v
         result.add(0, this->states[(int) qs.getValue(i)].getState());
     }
     return result;
+}
+
+template<class State, class Symbol> Hmm1<State, Symbol>::Hmm1(unordered_set<State> states, int observationCount, vector<State> *observations, vector<Symbol> *emittedSymbols) {
+    int i = 0;
+    this->stateCount = states.size();
+    for (State state : states){
+        this->stateIndexes.emplace(state, i);
+        i++;
+    }
+    calculatePi(observations);
+    for (State state : states){
+        map<Symbol, double> emissionProbabilities = calculateEmissionProbabilities(state, observationCount, observations, emittedSymbols);
+        this->states.emplace_back(state, emissionProbabilities);
+    }
+    calculateTransitionProbabilities(observations);
 }

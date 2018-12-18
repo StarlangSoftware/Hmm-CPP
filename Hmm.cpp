@@ -5,21 +5,6 @@
 #include <CounterHashMap.h>
 #include "Hmm.h"
 
-template<class State, class Symbol> Hmm<State, Symbol>::Hmm(unordered_set<State> states, int observationCount, vector<State> *observations, vector<Symbol> *emittedSymbols) {
-    int i = 0;
-    stateCount = states.size();
-    for (State state : states){
-        stateIndexes.emplace(state, i);
-        i++;
-    }
-    calculatePi(observations);
-    for (State state : states){
-        map<Symbol, double> emissionProbabilities = calculateEmissionProbabilities(state, observationCount, observations, emittedSymbols);
-        this->states.emplace_back(state, emissionProbabilities);
-    }
-    calculateTransitionProbabilities(observations);
-}
-
 template<class State, class Symbol> map<Symbol, double> Hmm<State, Symbol>::calculateEmissionProbabilities(State state, int observationCount, vector<State> *observations, vector<Symbol> *emittedSymbols) {
     CounterHashMap<Symbol> counts;
     map<Symbol, double> emissionProbabilities;
