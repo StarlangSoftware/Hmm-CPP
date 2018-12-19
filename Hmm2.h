@@ -50,7 +50,7 @@ template<class State, class Symbol> Vector Hmm2<State, Symbol>::logOfColumn(int 
     Vector result = Vector(0, 0.0);
     int i;
     for (i = 0; i < this->stateCount; i++){
-        result.add(safeLog(this->transitionProbabilities.getValue(i * this->stateCount + column / this->stateCount, column % this->stateCount)));
+        result.add(this->safeLog(this->transitionProbabilities.getValue(i * this->stateCount + column / this->stateCount, column % this->stateCount)));
     }
     return result;
 }
@@ -65,17 +65,17 @@ template<class State, class Symbol> vector<State> Hmm2<State, Symbol>::viterbi(v
     double observationLikelihood;
     Matrix phi = Matrix(sequenceLength, this->stateCount * this->stateCount);
     /*Initialize*/
-    emission1 = s.get(0);
-    emission2 = s.get(1);
+    emission1 = s.at(0);
+    emission2 = s.at(1);
     for (i = 0; i < this->stateCount; i++){
         for (j = 0; j < this->stateCount; j++){
             observationLikelihood = this->states.at(i).getEmitProb(emission1) * this->states.at(j).getEmitProb(emission2);
-            gamma.setValue(1, i * this->stateCount + j, safeLog(pi.getValue(i, j)) + this->safeLog(observationLikelihood));
+            gamma.setValue(1, i * this->stateCount + j, this->safeLog(pi.getValue(i, j)) + this->safeLog(observationLikelihood));
         }
     }
     /*Iterate Dynamic Programming*/
     for (t = 2; t < sequenceLength; t++){
-        emission = s.get(t);
+        emission = s.at(t);
         for (j = 0; j < this->stateCount * this->stateCount; j++){
             Vector current = logOfColumn(j);
             try {
