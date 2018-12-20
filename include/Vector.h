@@ -40,6 +40,8 @@ public:
     double getValue(unsigned long index);
     void setValue(unsigned long index, double value);
     void addValue(unsigned long index, double value);
+    double sum();
+    void swap(int index1, int index2);
 };
 
 

@@ -17,10 +17,10 @@ int main(){
     unordered_set<int> symbols;
     vector<int> observed;
     observed.push_back(1);
-    observed.push_back(1);
-    observed.push_back(1);
-    observed.push_back(1);
-    observed.push_back(1);
+    observed.push_back(2);
+    observed.push_back(3);
+    observed.push_back(3);
+    observed.push_back(2);
     observed.push_back(1);
     states.emplace("HOT");
     states.emplace("COLD");

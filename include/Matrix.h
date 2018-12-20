@@ -14,13 +14,13 @@ class Matrix {
 private:
     int row;
     int col;
-    double* values;
+    vector<Vector> values;
 public:
     Matrix(string filename);
-    ~Matrix();
     Matrix(int row, int col);
     Matrix(int row, int col, double min, double max);
     Matrix(int size);
+    Matrix clone();
     void printToFile(string fileName);
     double getValue(int rowNo, int colNo);
     void setValue(int rowNo, int colNo, double value);
