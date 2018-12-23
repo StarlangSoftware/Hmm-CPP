@@ -1,0 +1,13 @@
+.idea/Hmm.iml
+cmake-build-debug/Hmm.cbp
+cmake-build-debug/TestHmm
+cmake-build-debug/CMakeFiles/TestHmm.dir/build.make
+cmake-build-debug/CMakeFiles/TestHmm.dir/cmake_clean.cmake
+cmake-build-debug/CMakeFiles/TestHmm.dir/CXX.includecache
+cmake-build-debug/CMakeFiles/TestHmm.dir/depend.internal
+cmake-build-debug/CMakeFiles/TestHmm.dir/depend.make
+cmake-build-debug/CMakeFiles/TestHmm.dir/DependInfo.cmake
+cmake-build-debug/CMakeFiles/TestHmm.dir/flags.make
+cmake-build-debug/CMakeFiles/TestHmm.dir/link.txt
+cmake-build-debug/CMakeFiles/TestHmm.dir/progress.make
+cmake-build-debug/CMakeFiles/TestHmm.dir/TestHmm.cpp.o
