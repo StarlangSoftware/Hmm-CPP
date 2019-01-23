@@ -15,11 +15,15 @@ private:
     Vector pi = Vector(0, 0.0);
     Vector logOfColumn(int column);
 public:
+    Hmm1();
     void calculatePi(int observationCount, vector<State>* observations);
     void calculateTransitionProbabilities(int observationCount, vector<State>* observations);
     vector<State> viterbi(vector<Symbol> s);
     Hmm1(unordered_set<State> states, int observationCount, vector<State> *observations, vector<Symbol> *emittedSymbols);
 };
+
+template<class State, class Symbol> Hmm1<State, Symbol>::Hmm1() {
+}
 
 template<class State, class Symbol> void Hmm1<State, Symbol>::calculatePi(int observationCount, vector<State> *observations) {
     pi = Vector(this->stateCount, 0.0);
