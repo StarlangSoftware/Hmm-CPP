@@ -1,0 +1,6 @@
+[submodule "library/DataStructure-CPP"]
+	path = library/DataStructure-CPP
+	url = https://github.com/olcaytaner/DataStructure-CPP.git
+[submodule "library/Math-CPP"]
+	path = library/Math-CPP
+	url = https://github.com/olcaytaner/Math-CPP.git
