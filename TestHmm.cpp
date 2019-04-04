@@ -3,6 +3,7 @@
 //
 #include <vector>
 #include <unordered_set>
+#include <fstream>
 #include "Hmm.h"
 #include "Hmm1.h"
 #include "Hmm2.h"
@@ -73,4 +74,12 @@ int main(){
     emittedSymbols[4].push_back(1);
     Hmm1<string, int> hmm(states, 5, observations, emittedSymbols);
     vector<string> observedStates = hmm.viterbi(observed);
+    ofstream outputFile;
+    outputFile.open("deneme.txt", ofstream::out);
+    hmm.serialize(outputFile);
+    outputFile.close();
+    ifstream inputFile;
+    inputFile.open("deneme.txt");
+    Hmm1<string, int> hmmRead(inputFile);
+    inputFile.close();
 }

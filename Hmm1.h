@@ -16,10 +16,12 @@ private:
     Vector logOfColumn(int column);
 public:
     Hmm1();
+    explicit Hmm1(ifstream& inputFile);
     void calculatePi(int observationCount, vector<State>* observations);
     void calculateTransitionProbabilities(int observationCount, vector<State>* observations);
     vector<State> viterbi(vector<Symbol> s);
     Hmm1(unordered_set<State> states, int observationCount, vector<State> *observations, vector<Symbol> *emittedSymbols);
+    void serialize(ostream& outputFile) override;
 };
 
 template<class State, class Symbol> Hmm1<State, Symbol>::Hmm1() {
@@ -110,6 +112,17 @@ template<class State, class Symbol> Hmm1<State, Symbol>::Hmm1(unordered_set<Stat
         this->states.emplace_back(state, emissionProbabilities);
     }
     calculateTransitionProbabilities(observationCount, observations);
+}
+
+template<class State, class Symbol>
+void Hmm1<State, Symbol>::serialize(ostream &outputFile) {
+    Hmm<State, Symbol>::serialize(outputFile);
+    pi.serialize(outputFile);
+}
+
+template<class State, class Symbol>
+Hmm1<State, Symbol>::Hmm1(ifstream &inputFile):Hmm<State, Symbol>(inputFile) {
+    pi = Vector(inputFile);
 }
 
 #endif //HMM_HMM1_H

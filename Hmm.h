@@ -8,6 +8,7 @@
 #include<map>
 #include <list>
 #include <unordered_set>
+#include <fstream>
 #include "HmmState.h"
 #include <CounterHashMap.h>
 
@@ -18,8 +19,11 @@ protected:
     vector<HmmState<State, Symbol>> states;
     unsigned long stateCount = 0;
 public:
+    Hmm() = default;
+    explicit Hmm(ifstream& inputFile);
     map<Symbol, double> calculateEmissionProbabilities(State state, int observationCount, vector<State>* observations, vector<Symbol>* emittedSymbols);
     double safeLog(double x);
+    virtual void serialize(ostream& outputFile);
 };
 
 template<class State, class Symbol> map<Symbol, double> Hmm<State, Symbol>::calculateEmissionProbabilities(State state, int observationCount, vector<State> *observations, vector<Symbol> *emittedSymbols) {
@@ -49,6 +53,34 @@ template<class State, class Symbol> double Hmm<State, Symbol>::safeLog(double x)
     }
     else{
         return log(x);
+    }
+}
+
+template<class State, class Symbol> void Hmm<State, Symbol>::serialize(ostream &outputFile) {
+    outputFile << stateCount << "\n";
+    transitionProbabilities.serialize(outputFile);
+    for (auto& iterator : stateIndexes){
+        outputFile << iterator.first << "\n";
+        outputFile << iterator.second << "\n";
+    }
+    for (HmmState<State, Symbol> state : states){
+        state.serialize(outputFile);
+    }
+}
+
+template<class State, class Symbol>
+Hmm<State, Symbol>::Hmm(ifstream &inputFile) {
+    inputFile >> stateCount;
+    transitionProbabilities = Matrix(inputFile);
+    for (int i = 0; i < stateCount; i++){
+        State state;
+        inputFile >> state;
+        unsigned long index = 0;
+        inputFile >> index;
+        stateIndexes.emplace(state, index);
+    }
+    for (int i = 0; i < stateCount; i++){
+        states.emplace_back(HmmState<State, Symbol>(inputFile));
     }
 }
 
