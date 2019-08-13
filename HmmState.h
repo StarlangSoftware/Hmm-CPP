@@ -20,15 +20,33 @@ public:
     void serialize(ostream& outputFile);
 };
 
+/**
+ * A constructor of {@link HmmState} class which takes a {@link State} and emission probabilities as inputs and
+ * initializes corresponding class variable with these inputs.
+ *
+ * @param state Data for this state.
+ * @param emissionProbabilities Emission probabilities for this state
+ */
 template<class State, class Symbol> HmmState<State, Symbol>::HmmState(State state, map<Symbol, double> emissionProbabilities) {
     this->state = state;
     this->emissionProbabilities = emissionProbabilities;
 }
 
+/**
+ * Accessor method for the state variable.
+ *
+ * @return state variable.
+ */
 template<class State, class Symbol> State HmmState<State, Symbol>::getState() {
     return state;
 }
 
+/**
+ * getEmitProb method returns the emission probability for a specific symbol.
+ *
+ * @param symbol Symbol for which the emission probability will be get.
+ * @return Emission probability for a specific symbol.
+ */
 template<class State, class Symbol> double HmmState<State, Symbol>::getEmitProb(Symbol symbol) {
     if (emissionProbabilities.find(symbol) != emissionProbabilities.end()){
         return emissionProbabilities.find(symbol)->second;

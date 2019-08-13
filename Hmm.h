@@ -26,6 +26,16 @@ public:
     virtual void serialize(ostream& outputFile);
 };
 
+/**
+ * A constructor of {@link Hmm} class which takes a {@link Set} of states, an array of observations (which also
+ * consists of an array of states) and an array of instances (which also consists of an array of emitted symbols).
+ * The constructor initializes the state array with the set of states and uses observations and emitted symbols
+ * to calculate the emission probabilities for those states.
+ *
+ * @param states A {@link Set} of states, consisting of all possible states for this problem.
+ * @param observations An array of instances, where each instance consists of an array of states.
+ * @param emittedSymbols An array of instances, where each instance consists of an array of symbols.
+ */
 template<class State, class Symbol> map<Symbol, double> Hmm<State, Symbol>::calculateEmissionProbabilities(State state, int observationCount, vector<State> *observations, vector<Symbol> *emittedSymbols) {
     CounterHashMap<Symbol> counts;
     map<Symbol, double> emissionProbabilities;
@@ -47,6 +57,13 @@ template<class State, class Symbol> map<Symbol, double> Hmm<State, Symbol>::calc
     return emissionProbabilities;
 }
 
+/**
+ * safeLog calculates the logarithm of a number. If the number is less than 0, the logarithm is not defined, therefore
+ * the function returns -Infinity.
+ *
+ * @param x Input number
+ * @return the logarithm of x. If x < 0 return -infinity.
+ */
 template<class State, class Symbol> double Hmm<State, Symbol>::safeLog(double x) {
     if (x <= 0){
         return INT_MIN;
