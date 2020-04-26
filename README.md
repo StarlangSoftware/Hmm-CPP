@@ -1,6 +1,8 @@
 # Hmm-CPP
-You can also see either [Java](https://github.com/olcaytaner/Hmm) 
-or [Python](https://github.com/olcaytaner/Hmm-Py) repository.
+
+For Developers
+============
+You can also see [Java](https://github.com/starlangsoftware/Hmm), [Python](https://github.com/starlangsoftware/Hmm-Py),  or [C#](https://github.com/starlangsoftware/Hmm-CS) repository.
 
 Detailed Description
 ============
