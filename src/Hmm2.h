@@ -6,9 +6,9 @@
 #define HMM_HMM2_H
 
 
-#include <Matrix.h>
+#include "Matrix.h"
 #include "Hmm.h"
-#include <VectorSizeMismatch.h>
+#include "VectorSizeMismatch.h"
 
 template <class State, class Symbol> class Hmm2 : public Hmm<State, Symbol> {
 private:

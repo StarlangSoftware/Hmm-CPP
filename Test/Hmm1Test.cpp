@@ -4,7 +4,7 @@
 
 #define CATCH_CONFIG_MAIN  // This tells Catch to provide a main() - only do this in one cpp file
 #include "catch.hpp"
-#include "../Hmm1.h"
+#include "../src/Hmm1.h"
 
 TEST_CASE("Hmm1Test-testViterbi") {
     unordered_set<string> states = {"HOT", "COLD"};

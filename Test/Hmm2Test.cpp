@@ -3,7 +3,7 @@
 //
 
 #include "catch.hpp"
-#include "../Hmm2.h"
+#include "../src/Hmm2.h"
 
 TEST_CASE("Hmm2Test-testViterbi") {
     unordered_set<string> states = {"HOT", "COLD"};

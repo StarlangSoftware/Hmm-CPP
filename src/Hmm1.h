@@ -5,9 +5,9 @@
 #ifndef HMM_HMM1_H
 #define HMM_HMM1_H
 
-#include <Vector.h>
+#include "Vector.h"
 #include <unordered_set>
-#include <VectorSizeMismatch.h>
+#include "VectorSizeMismatch.h"
 #include "Hmm.h"
 
 template <class State, class Symbol> class Hmm1 : public Hmm<State, Symbol> {

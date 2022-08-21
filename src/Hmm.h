@@ -4,13 +4,13 @@
 
 #ifndef HMM_HMM_H
 #define HMM_HMM_H
-#include <Matrix.h>
+#include "Matrix.h"
 #include<map>
 #include <list>
 #include <unordered_set>
 #include <fstream>
 #include "HmmState.h"
-#include <CounterHashMap.h>
+#include "CounterHashMap.h"
 
 template <class State, class Symbol> class Hmm {
 protected:
