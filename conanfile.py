@@ -10,6 +10,7 @@ class HmmConan(ConanFile):
     url = "https://github.com/StarlangSoftware/Math-CPP"
     description = "Hmm library"
     topics = ("")
+    generators = "cmake"
     exports_sources = "src/*"
     no_copy_source = True
 
