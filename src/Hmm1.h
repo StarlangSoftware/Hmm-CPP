@@ -19,13 +19,12 @@ public:
     explicit Hmm1(ifstream& inputFile);
     void calculatePi(int observationCount, vector<State>* observations);
     void calculateTransitionProbabilities(int observationCount, vector<State>* observations);
-    vector<State> viterbi(vector<Symbol> s);
-    Hmm1(unordered_set<State> states, int observationCount, vector<State> *observations, vector<Symbol> *emittedSymbols);
+    vector<State> viterbi(const vector<Symbol>& s);
+    Hmm1(const unordered_set<State>& states, int observationCount, vector<State> *observations, vector<Symbol> *emittedSymbols);
     void serialize(ostream& outputFile) override;
 };
 
-template<class State, class Symbol> Hmm1<State, Symbol>::Hmm1() {
-}
+template<class State, class Symbol> Hmm1<State, Symbol>::Hmm1() = default;
 
 /**
  * calculatePi calculates the prior probability vector (initial probabilities for each state) from a set of
@@ -85,7 +84,7 @@ template<class State, class Symbol> Vector Hmm1<State, Symbol>::logOfColumn(int 
  * @param s A set of observed symbols.
  * @return The most probable state sequence as an {@link ArrayList}.
  */
-template<class State, class Symbol> vector<State> Hmm1<State, Symbol>::viterbi(vector<Symbol> s) {
+template<class State, class Symbol> vector<State> Hmm1<State, Symbol>::viterbi(const vector<Symbol>& s) {
     int i, j, t;
     Symbol emission;
     vector<State> result;
@@ -134,7 +133,7 @@ template<class State, class Symbol> vector<State> Hmm1<State, Symbol>::viterbi(v
  * @param observations An array of instances, where each instance consists of an array of states.
  * @param emittedSymbols An array of instances, where each instance consists of an array of symbols.
  */
-template<class State, class Symbol> Hmm1<State, Symbol>::Hmm1(unordered_set<State> states, int observationCount, vector<State> *observations, vector<Symbol> *emittedSymbols) {
+template<class State, class Symbol> Hmm1<State, Symbol>::Hmm1(const unordered_set<State>& states, int observationCount, vector<State> *observations, vector<Symbol> *emittedSymbols) {
     int i = 0;
     this->stateCount = states.size();
     for (State state : states){

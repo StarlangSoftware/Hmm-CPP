@@ -17,15 +17,14 @@ private:
 public:
     Hmm2();
     explicit Hmm2(ifstream& inputFile);
-    vector<State> viterbi(vector<Symbol> s);
+    vector<State> viterbi(const vector<Symbol>& s);
     void calculatePi(int observationCount, vector<State>* observations);
     void calculateTransitionProbabilities(int observationCount, vector<State>* observations);
-    Hmm2(unordered_set<State> states, int observationCount, vector<State> *observations, vector<Symbol> *emittedSymbols);
+    Hmm2(const unordered_set<State>& states, int observationCount, vector<State> *observations, vector<Symbol> *emittedSymbols);
     void serialize(ostream& outputFile) override;
 };
 
-template<class State, class Symbol> Hmm2<State, Symbol>::Hmm2() {
-}
+template<class State, class Symbol> Hmm2<State, Symbol>::Hmm2() = default;
 
 /**
  * calculatePi calculates the prior probability matrix (initial probabilities for each state combinations)
@@ -88,7 +87,7 @@ template<class State, class Symbol> Vector Hmm2<State, Symbol>::logOfColumn(int 
  * @param s A set of observed symbols.
  * @return The most probable state sequence as an {@link ArrayList}.
  */
-template<class State, class Symbol> vector<State> Hmm2<State, Symbol>::viterbi(vector<Symbol> s) {
+template<class State, class Symbol> vector<State> Hmm2<State, Symbol>::viterbi(const vector<Symbol>& s) {
     int i, j, t, maxIndex;
     int sequenceLength = s.size();
     Symbol emission, emission1, emission2;
@@ -142,7 +141,7 @@ template<class State, class Symbol> vector<State> Hmm2<State, Symbol>::viterbi(v
  * @param observations An array of instances, where each instance consists of an array of states.
  * @param emittedSymbols An array of instances, where each instance consists of an array of symbols.
  */
-template<class State, class Symbol> Hmm2<State, Symbol>::Hmm2(unordered_set<State> states, int observationCount, vector<State> *observations, vector<Symbol> *emittedSymbols) {
+template<class State, class Symbol> Hmm2<State, Symbol>::Hmm2(const unordered_set<State>& states, int observationCount, vector<State> *observations, vector<Symbol> *emittedSymbols) {
     int i = 0;
     this->stateCount = states.size();
     for (State state : states){
