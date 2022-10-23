@@ -15,8 +15,8 @@ protected:
 public:
     explicit HmmState(ifstream& inputFile);
     HmmState(const State& state, const map<Symbol, double>& emissionProbabilities);
-    State getState();
-    double getEmitProb(const Symbol& symbol);
+    State getState() const;
+    double getEmitProb(const Symbol& symbol) const;
     void serialize(ostream& outputFile);
 };
 
@@ -37,7 +37,7 @@ template<class State, class Symbol> HmmState<State, Symbol>::HmmState(const Stat
  *
  * @return state variable.
  */
-template<class State, class Symbol> State HmmState<State, Symbol>::getState() {
+template<class State, class Symbol> State HmmState<State, Symbol>::getState() const{
     return state;
 }
 
@@ -47,7 +47,7 @@ template<class State, class Symbol> State HmmState<State, Symbol>::getState() {
  * @param symbol Symbol for which the emission probability will be get.
  * @return Emission probability for a specific symbol.
  */
-template<class State, class Symbol> double HmmState<State, Symbol>::getEmitProb(const Symbol& symbol) {
+template<class State, class Symbol> double HmmState<State, Symbol>::getEmitProb(const Symbol& symbol) const{
     if (emissionProbabilities.find(symbol) != emissionProbabilities.end()){
         return emissionProbabilities.find(symbol)->second;
     } else {

@@ -13,13 +13,13 @@
 template <class State, class Symbol> class Hmm1 : public Hmm<State, Symbol> {
 private:
     Vector pi = Vector(0, 0.0);
-    Vector logOfColumn(int column);
+    Vector logOfColumn(int column) const;
 public:
     Hmm1();
     explicit Hmm1(ifstream& inputFile);
     void calculatePi(int observationCount, vector<State>* observations);
     void calculateTransitionProbabilities(int observationCount, vector<State>* observations);
-    vector<State> viterbi(const vector<Symbol>& s);
+    vector<State> viterbi(const vector<Symbol>& s) const;
     Hmm1(const unordered_set<State>& states, int observationCount, vector<State> *observations, vector<Symbol> *emittedSymbols);
     void serialize(ostream& outputFile) override;
 };
@@ -69,7 +69,7 @@ template<class State, class Symbol> void Hmm1<State, Symbol>::calculateTransitio
  * @param column Column index of the transition probability matrix.
  * @return A vector consisting of the logarithm of each value in the column in the transition probability matrix.
  */
-template<class State, class Symbol> Vector Hmm1<State, Symbol>::logOfColumn(int column) {
+template<class State, class Symbol> Vector Hmm1<State, Symbol>::logOfColumn(int column) const{
     Vector result = Vector(0, 0.0);
     int i;
     for (i = 0; i < this->stateCount; i++){
@@ -84,7 +84,7 @@ template<class State, class Symbol> Vector Hmm1<State, Symbol>::logOfColumn(int 
  * @param s A set of observed symbols.
  * @return The most probable state sequence as an {@link ArrayList}.
  */
-template<class State, class Symbol> vector<State> Hmm1<State, Symbol>::viterbi(const vector<Symbol>& s) {
+template<class State, class Symbol> vector<State> Hmm1<State, Symbol>::viterbi(const vector<Symbol>& s) const{
     int i, j, t;
     Symbol emission;
     vector<State> result;

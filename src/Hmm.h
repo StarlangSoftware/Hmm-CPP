@@ -21,8 +21,8 @@ protected:
 public:
     Hmm() = default;
     explicit Hmm(ifstream& inputFile);
-    map<Symbol, double> calculateEmissionProbabilities(const State& state, int observationCount, vector<State>* observations, vector<Symbol>* emittedSymbols);
-    double safeLog(double x);
+    map<Symbol, double> calculateEmissionProbabilities(const State& state, int observationCount, vector<State>* observations, vector<Symbol>* emittedSymbols) const;
+    double safeLog(double x) const;
     virtual void serialize(ostream& outputFile);
 };
 
@@ -36,7 +36,7 @@ public:
  * @param observations An array of instances, where each instance consists of an array of states.
  * @param emittedSymbols An array of instances, where each instance consists of an array of symbols.
  */
-template<class State, class Symbol> map<Symbol, double> Hmm<State, Symbol>::calculateEmissionProbabilities(const State& state, int observationCount, vector<State> *observations, vector<Symbol> *emittedSymbols) {
+template<class State, class Symbol> map<Symbol, double> Hmm<State, Symbol>::calculateEmissionProbabilities(const State& state, int observationCount, vector<State> *observations, vector<Symbol> *emittedSymbols) const{
     CounterHashMap<Symbol> counts;
     map<Symbol, double> emissionProbabilities;
     State currentState;
@@ -64,7 +64,7 @@ template<class State, class Symbol> map<Symbol, double> Hmm<State, Symbol>::calc
  * @param x Input number
  * @return the logarithm of x. If x < 0 return -infinity.
  */
-template<class State, class Symbol> double Hmm<State, Symbol>::safeLog(double x) {
+template<class State, class Symbol> double Hmm<State, Symbol>::safeLog(double x) const{
     if (x <= 0){
         return INT_MIN;
     }
