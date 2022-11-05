@@ -21,7 +21,6 @@ public:
     void calculateTransitionProbabilities(int observationCount, vector<State>* observations);
     vector<State> viterbi(const vector<Symbol>& s) const;
     Hmm1(const unordered_set<State>& states, int observationCount, vector<State> *observations, vector<Symbol> *emittedSymbols);
-    void serialize(ostream& outputFile) override;
 };
 
 template<class State, class Symbol> Hmm1<State, Symbol>::Hmm1() = default;
@@ -146,12 +145,6 @@ template<class State, class Symbol> Hmm1<State, Symbol>::Hmm1(const unordered_se
         this->states.emplace_back(state, emissionProbabilities);
     }
     calculateTransitionProbabilities(observationCount, observations);
-}
-
-template<class State, class Symbol>
-void Hmm1<State, Symbol>::serialize(ostream &outputFile) {
-    Hmm<State, Symbol>::serialize(outputFile);
-    pi.serialize(outputFile);
 }
 
 template<class State, class Symbol>
