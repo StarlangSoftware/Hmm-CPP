@@ -32,7 +32,7 @@ Use Git for cloning the code to your local or below line for Ubuntu:
 
 	git clone <your-fork-git-link>
 
-A directory called SentiNet-CPP will be created. Or you can use below link for exploring the code:
+A directory called Hmm-CPP will be created. Or you can use below link for exploring the code:
 
 	git clone https://github.com/starlangsoftware/Hmm-CPP.git
 
