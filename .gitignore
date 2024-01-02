@@ -100,3 +100,5 @@ cmake-build-debug/CMakeFiles/3.17.3/CompilerIdCXX/CMakeCXXCompilerId.cpp
 /cmake-build-debug/conanbuildinfo.txt
 /cmake-build-debug/conaninfo.txt
 /cmake-build-debug/graph_info.json
+/src/CMakeUserPresets.json
+/conan_provider.cmake
