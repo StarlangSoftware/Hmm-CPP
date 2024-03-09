@@ -3,7 +3,6 @@ from os.path import join
 from conan import ConanFile
 from conan.tools.files import copy
 
-
 class HmmConan(ConanFile):
     name = "hmm"
     version = "1.0.0"
@@ -13,8 +12,10 @@ class HmmConan(ConanFile):
     url = "https://github.com/StarlangSoftware/Math-CPP"
     description = "Hmm library"
     topics = ("")
+    settings = "os", "compiler", "build_type", "arch"
+    options = {"shared": [True, False], "fPIC": [True, False]}
+    default_options = {"shared": False, "fPIC": True}
     exports_sources = "src/*"
-    no_copy_source = True
 
     def package(self):
-        copy("*.h", keep_path=False, src=join(self.source_folder), dst=join(self.package_folder, "include"), pattern="*.h")
+        copy(conanfile=self, keep_path=False, src=join(self.source_folder), dst=join(self.package_folder, "include"), pattern="*.h")
