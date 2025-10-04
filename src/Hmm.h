@@ -6,6 +6,7 @@
 #define HMM_HMM_H
 #include "Matrix.h"
 #include<map>
+#include<climits>
 #include <list>
 #include <unordered_set>
 #include <fstream>
